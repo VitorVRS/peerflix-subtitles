@@ -14,7 +14,6 @@
     "url": "git://github.com/VitorVRS/peerflix-subtitles.git"
   },
   "dependencies": {
-    "peerflix": "^0.32.1",
     "opensubtitles-api": "^2.1"
   },
   "devDependencies": {
