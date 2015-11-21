@@ -1,0 +1,26 @@
+{
+  "name": "peerflix-subtitles",
+  "description": "Module to retrieve subtitles for peerflix",
+  "version": "0.1.0",
+  "author": "Vitor Rocha (@VitorVRS)",
+  "license": "MIT",
+  "homepage": "https://github.com/VitorVRS/peerflix-subtitles",
+  "main": "index.js",
+  "bugs": {
+    "url": "https://github.com/VitorVRS/peerflix-subtitles/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/VitorVRS/peerflix-subtitles.git"
+  },
+  "dependencies": {
+    "peerflix": "^0.32.1",
+    "opensubtitles-api": "^2.1"
+  },
+  "devDependencies": {
+    "standard": "^2.2.3"
+  },
+  "scripts": {
+    "test": "standard"
+  }
+}
