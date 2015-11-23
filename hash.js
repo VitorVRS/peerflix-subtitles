@@ -1,6 +1,6 @@
 var Hash = function (mediaFile) {
   this.mediaFile = mediaFile
-  this.HASH_CHUNK_SIZE = 65536 - 1 // 64 * 1024
+  this.HASH_CHUNK_SIZE = 65536 // 64 * 1024
 };
 
 (function () {
@@ -20,10 +20,15 @@ var Hash = function (mediaFile) {
       var _this = this
       var beginStream
 
-      beginStream = _this.mediaFile.createReadStream({start: 0, end: _this.HASH_CHUNK_SIZE})
+      beginStream = _this.mediaFile.createReadStream({start: 0, end: _this.HASH_CHUNK_SIZE - 1})
       beginStream.on('data', function (chunk) {
-        _this.start = chunk.toString('binary')
-        callback.call(_this)
+        var text = chunk.toString('binary')
+
+        _this.start += text
+
+        if (_this.start.length === _this.HASH_CHUNK_SIZE) {
+          callback.call(_this)
+        }
       })
     },
 
@@ -31,10 +36,16 @@ var Hash = function (mediaFile) {
       var _this = this
       var endStream
 
-      endStream = _this.mediaFile.createReadStream({start: (_this.mediaFile.length - _this.HASH_CHUNK_SIZE - 1), end: _this.mediaFile.length - 1})
+      endStream = _this.mediaFile.createReadStream({start: (_this.mediaFile.length - _this.HASH_CHUNK_SIZE), end: _this.mediaFile.length - 1})
       endStream.on('data', function (chunk) {
-        _this.end = chunk.toString('binary')
-        callback.call(_this)
+        var text = chunk.toString('binary')
+
+        _this.end += text
+
+        console.log(_this.end.length)
+        if (_this.end.length === _this.HASH_CHUNK_SIZE) {
+          callback.call(_this)
+        }
       })
     },
 
